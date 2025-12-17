@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('password');
             $table->string('phone')->nullable();
             $table->boolean('is_active')->default(true);
+            $table->dateTime('last_login_at')->nullable();
+            $table->string('role');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

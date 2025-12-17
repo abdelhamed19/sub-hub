@@ -10,11 +10,13 @@ class SuperAdminLayoutComponent extends Component
 {
     public $path;
     public $mode;
+    public $title;
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct($title = null)
     {
+        $this->title = $title;
         $locale = session()->get('lang', 'ar');
         if ($locale == 'ar') {
             $this->path = 'light-rtl';
@@ -33,6 +35,7 @@ class SuperAdminLayoutComponent extends Component
         return view('components.super-admin.super-admin-layout-component', [
             'path' => $this->path,
             'direction' => $this->mode,
+            'title' => $this->title,
         ]);
     }
 }

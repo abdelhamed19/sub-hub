@@ -1,0 +1,27 @@
+<?php
+
+return
+[
+    'edit' => 'Edit',
+    'delete' => 'Delete',
+    'update' => 'Update',
+    'cancel' => 'Cancel',
+    'create' => 'Create',
+    'save' => 'Save',
+    'submit' => 'Submit',
+    'show' => 'Show',
+    'name' => 'Name',
+    'email' => 'Email',
+    'phone' => 'Phone',
+    'city' => 'City',
+    'address' => 'Address',
+    'business_type' => 'Business Type',
+    'status' => 'Status',
+    'action' => 'Action',
+    'search' => 'Search',
+    'password' => 'Password',
+    'role' => 'Role',
+    'active' => 'Active',
+    'inactive' => 'Inactive',
+    'choose' => 'Choose',
+];

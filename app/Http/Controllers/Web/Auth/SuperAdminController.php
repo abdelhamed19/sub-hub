@@ -39,7 +39,7 @@ class SuperAdminController extends Controller
             'last_login_at' => now(),
         ]);
 
-        return redirect()->route('super_admin.dashboard');
+        return redirect('/super-admin');
     }
 
     public function logout(Request $request)

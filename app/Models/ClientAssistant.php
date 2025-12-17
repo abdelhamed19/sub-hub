@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class ClientAssistant extends Model
+class ClientAssistant extends Authenticatable
 {
-    use HasFactory;
+   use HasApiTokens, HasFactory, Notifiable;
     protected $fillable = [
         'client_id',
         'name',
@@ -22,5 +24,10 @@ class ClientAssistant extends Model
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = Hash::make($value);
+    }
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
     }
 }

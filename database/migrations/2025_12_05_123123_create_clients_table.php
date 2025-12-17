@@ -14,12 +14,29 @@ return new class extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('legal_name')->nullable();
             $table->string('email')->unique();
             $table->string('phone')->nullable();
-            $table->string('address')->nullable();
+            $table->string('alternative_phone')->nullable();
+            $table->text('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('country')->nullable();
+            $table->string('postal_code')->nullable();
+
             $table->string('logo')->nullable();
             $table->string('website')->nullable();
+            $table->string('business_type')->nullable();
+            $table->string('industry')->nullable();
+            $table->string('tax_id')->nullable();
+            $table->string('commercial_registration')->nullable();
+
             $table->boolean('is_active')->default(false);
+            $table->date('activated_at')->nullable();
+
+
+            $table->integer('employees_count')->nullable();
+            $table->text('notes')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

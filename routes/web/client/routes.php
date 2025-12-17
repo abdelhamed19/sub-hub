@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Web\SuperAdmin\ClientManageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,17 +16,11 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::prefix('/client')->group(function () {
+Route::middleware(['auth:super_admin,client'])->
+prefix('/client')
+->group(function () {
     // Home Page
-    Route::get('/', function () {
-        dd('Client Home Page');
-    });
 
-    // Auth
-    Route::prefix('/auth')->group(function(){
-        Route::get('/login', )->name('client.auth.login');
+});
 
-        Route::post('/login', )->name('client.auth.login.submit');
-    });
 
-})->middleware(['check.active:App\Models\ClientAssistant']);

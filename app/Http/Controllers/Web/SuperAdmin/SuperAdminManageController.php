@@ -13,4 +13,12 @@ class SuperAdminManageController extends Controller
         $superAdmins = SuperAdmin::paginate(10);
         return view('super_admin.manage', compact('superAdmins'));
     }
+    public function create()
+    {
+        return view('super_admin.create');
+    }
+    public function store(Request $request)
+    {
+        // Validate and store the new super admin
+    }
 }
