@@ -10,8 +10,15 @@
                                 <div class="form-row">
                                     <div class="form-group col-auto">
                                         <label for="search" class="sr-only">{{ __('mutual.search') }}</label>
-                                        <input type="text" class="form-control" style="width: 200px" id="search" value=""
-                                            placeholder="Search">
+                                        <form action="" method="GET">
+                                            <input type="text" class="form-control" style="width: 200px"
+                                                id="search" name="search" placeholder="{{ __('mutual.search') }}">
+                                        </form>
+                                        @if (request('search'))
+                                            <a href="{{ URL::previous() }}" class="btn btn-secondary btn-sm">
+                                                <i class="fas fa-times"></i> {{ __('mutual.reset') }}
+                                            </a>
+                                        @endif
                                     </div>
                                     {{-- <div class="form-group col-auto ml-3">
                                         <label class="my-1 mr-2 sr-only" for="inlineFormCustomSelectPref">Status</label>
@@ -28,9 +35,12 @@
                         </div>
                         <div class="col ml-auto">
                             <div class="dropdown float-right">
-                                <a href="{{ route($createRoute) }}" role="button" class="btn btn-primary float-right ml-3" type="button">{{ __('mutual.create') }} +</a>
+                                <a href="{{ route($createRoute) }}" role="button"
+                                    class="btn btn-primary float-right ml-3" type="button">{{ __('mutual.create') }}
+                                    +</a>
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="actionMenuButton"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> {{ __('mutual.action') }} </button>
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ __('mutual.action') }} </button>
                                 <div class="dropdown-menu" aria-labelledby="actionMenuButton">
                                     <a class="dropdown-item" href="#">Export</a>
                                     <a class="dropdown-item" href="#">Delete</a>

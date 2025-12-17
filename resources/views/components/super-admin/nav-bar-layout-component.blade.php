@@ -37,7 +37,7 @@
             <a class="nav-link dropdown-toggle text-muted pr-0" href="#" id="navbarDropdownMenuLink"
                 role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="avatar avatar-sm mt-2">
-                    <img src="{{ Auth::guard('super_admin')->user()->image ?? '' }}" alt="..."
+                    <img src="{{ asset('storage/' . Auth::guard('super_admin')->user()->image) ?? '' }}" alt="..."
                         class="avatar-img rounded-circle">
                 </span>
             </a>
@@ -48,7 +48,8 @@
                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     {{ __('admin.logout') }}
                 </a>
-                <form id="logout-form" action="{{ route('super_admin.auth.logout') }}" method="POST" style="display: none;">
+                <form id="logout-form" action="{{ route('super_admin.auth.logout') }}" method="POST"
+                    style="display: none;">
                     @csrf
                 </form>
             </div>

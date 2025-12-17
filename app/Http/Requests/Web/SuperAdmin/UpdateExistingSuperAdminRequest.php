@@ -7,7 +7,7 @@ use Illuminate\Validation\Rule;
 use App\Http\Requests\BaseRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegisterNewAdminRequest extends BaseRequest
+class UpdateExistingSuperAdminRequest extends BaseRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -18,8 +18,8 @@ class RegisterNewAdminRequest extends BaseRequest
     {
         return [
             'name' => ['required', 'string', 'max:255', 'min:3'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $this->route('id')],
+            'password' => ['nullable', 'string', 'min:8', 'confirmed'],
             'role' => ['required', Rule::in(SuperAdminRole::values())],
             'is_active' => ['required', 'boolean'],
             'image' => ['nullable', 'image'],

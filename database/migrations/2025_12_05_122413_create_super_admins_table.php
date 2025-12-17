@@ -20,6 +20,7 @@ return new class extends Migration
             $table->dateTime('last_login_at')->nullable();
             $table->boolean('is_active')->default(true);
             $table->string('image')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

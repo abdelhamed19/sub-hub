@@ -24,4 +24,7 @@ return
     'active' => 'نشط',
     'inactive' => 'غير نشط',
     'choose' => 'اختر',
+    'password_confirmation' => 'تأكيد كلمة المرور',
+    'image' => 'الصورة',
+    'reset' => 'إعادة تعيين',
 ];

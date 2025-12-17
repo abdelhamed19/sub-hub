@@ -12,12 +12,12 @@
                         </div>
                     </th>
                     <th>ID</th>
-                    <th>Last Login At</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>is_active</th>
-                    <th>Action</th>
+                    <th>{{ __('super_admin.last_login') }}</th>
+                    <th>{{ __('mutual.name') }}</th>
+                    <th>{{ __('mutual.email') }}</th>
+                    <th>{{ __('mutual.role') }}</th>
+                    <th>{{ __('mutual.status') }}</th>
+                    <th>{{ __('mutual.action') }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,9 +41,15 @@
                                 <span class="text-muted sr-only">Action</span>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#">Edit</a>
-                                <a class="dropdown-item" href="#">Remove</a>
-                                <a class="dropdown-item" href="#">Assign</a>
+                                <a class="dropdown-item"
+                                    href="{{ route('super_admin.edit', $admin->id) }}">{{ __('mutual.edit') }}</a>
+                                <a class="dropdown-item text-danger" href="javascript:void(0)"
+                                    data-name="{{ $admin->name }}"
+                                    data-action="super-admin/{{ $admin->id }}/delete" onclick="confirmDelete(this)">
+                                    {{ __('mutual.delete') }}
+                                </a>
+                                <a class="dropdown-item"
+                                    href="{{ route('super_admin.show', $admin->id) }}">{{ __('mutual.show') }}</a>
                             </div>
                         </td>
                     </tr>

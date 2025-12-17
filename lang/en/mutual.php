@@ -24,4 +24,7 @@ return
     'active' => 'Active',
     'inactive' => 'Inactive',
     'choose' => 'Choose',
+    'password_confirmation' => 'Password Confirmation',
+    'image' => 'Image',
+    'reset' => 'Reset',
 ];

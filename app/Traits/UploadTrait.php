@@ -2,38 +2,30 @@
 
 namespace App\Traits;
 
-use Illuminate\Support\Facades\Storage;
 
 trait UploadTrait
 {
-    /**
-     * رفع الملف إلى التخزين المحدد.
-     *
-     * @param \Illuminate\Http\UploadedFile $file
-     * @param string $directory
-     * @return string
-     */
-    public function uploadFile($file, $directory = 'images')
+    public function uploadImage($image, $directory)
     {
-        $fileName = time() . '_' . $file->getClientOriginalName();
-        return $file->storeAs($directory, $fileName);
+        $imageName = time() . '_' . $image->getClientOriginalName();
+        $image->move(storage_path('app/public/' . $directory), $imageName);
+        return $directory . '/' . $imageName;
     }
 
-    /**
-     * حذف الملف من التخزين.
-     *
-     * @param string $filePath
-     * @return bool
-     */
-    public function deleteFile($filePath)
+    public function deleteImage($imagePath)
     {
-        if (Storage::exists($filePath)) {
-            return Storage::delete($filePath);
+        if (!$imagePath) {
+            return;
         }
-        return false;
+        $fullPath = storage_path('app/public/' . $imagePath);
+        if (file_exists($fullPath)) {
+            unlink($fullPath);
+        }
     }
-    public function getFileUrl($filePath)
+
+    public function updateImage($newImage, $oldImagePath, $directory)
     {
-        return Storage::url($filePath);
+        $this->deleteImage($oldImagePath);
+        return $this->uploadImage($newImage, $directory);
     }
 }

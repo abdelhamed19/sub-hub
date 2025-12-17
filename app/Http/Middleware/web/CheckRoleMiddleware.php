@@ -15,8 +15,7 @@ class CheckRoleMiddleware
      */
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        // dd($roles, auth()->guard('super_admin')->user()->role->value);
-        if (array_values($roles) === ['all']) {
+        if (array_values($roles) === ['all'] || empty($roles)) {
             return $next($request);
         }
         if (auth()->guard('super_admin')->check()) {

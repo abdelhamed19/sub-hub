@@ -11,6 +11,7 @@
     <title>{{ $title ?? 'Dashboard' }}</title>
     <!-- Simple bar CSS -->
     <link rel="stylesheet" href="{{ asset("dashboard/$path/css/simplebar.css") }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <!-- Fonts CSS -->
@@ -282,7 +283,23 @@
         gtag('js', new Date());
         gtag('config', 'UA-56159088-1');
     </script>
+    <script>
+        function togglePassword(fieldId, iconElement) {
+            const field = document.getElementById(fieldId);
+            const icon = iconElement.querySelector('i');
 
+            if (field.type === 'password') {
+                field.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                field.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+    </script>
+    <x-delete-alert-message-component />
 </body>
 
 </html>

@@ -21,10 +21,16 @@ use App\Http\Controllers\Web\SuperAdmin\SuperAdminManageController;
 Route::middleware(['auth:super_admin'])->prefix('/super-admin')
     ->group(function () {
         // Home Page
-        Route::post('/logout', [SuperAdminController::class, 'logout'])->name('super_admin.auth.logout');
-        Route::get('/', [SuperAdminController::class, 'dashboard'])->name('super_admin.dashboard');
+        Route::post('/logout', [SuperAdminController::class, 'logout'])->name('super_admin.auth.logout')->middleware('check.role:all');
+        Route::get('/', [SuperAdminController::class, 'dashboard'])->name('super_admin.dashboard')->middleware('check.role:all');
         Route::get('/manage', [SuperAdminManageController::class, 'index'])->name('super_admin.manage')->middleware('check.role:all');
-        Route::get('/create', [SuperAdminManageController::class, 'create'])->name('super_admin.create')->middleware('check.role:super,support');
+        Route::get('/create', [SuperAdminManageController::class, 'create'])->name('super_admin.create')->middleware('check.role:all');
+        Route::post('/store', [SuperAdminManageController::class, 'store'])->name('super_admin.store')->middleware('check.role:all');
+        Route::get('/{id}/show', [SuperAdminManageController::class, 'show'])->name('super_admin.show')->middleware('check.role:all');
+        Route::get('/{id}/edit', [SuperAdminManageController::class, 'edit'])->name('super_admin.edit')->middleware('check.role:all');
+        Route::post('/{id}/update', [SuperAdminManageController::class, 'update'])->name('super_admin.update')->middleware('check.role:all');
+        Route::delete('/{id}/delete', [SuperAdminManageController::class, 'delete'])
+            ->name('super_admin.delete');
 
         Route::get('/client/dashboard', [ClientManageController::class, 'dashboard'])->name('super_admin.client.dashboard');
         Route::get('/client/manage', [ClientManageController::class, 'index'])->name('super_admin.client.manage');

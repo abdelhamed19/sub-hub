@@ -1,4 +1,4 @@
-<x-super-admin.super-admin-layout-component :title="__('Create New Super Admin')">
+<x-super-admin.super-admin-layout-component :title="__('Update Super Admin')">
     <div class="row">
         <div class="col-md-12">
             <div class="card shadow mb-4">
@@ -6,57 +6,24 @@
                     <strong class="card-title">{{ __('super_admin.create_new_super_admin') }}</strong>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('super_admin.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('super_admin.update', $superAdmin->id) }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label for="inputEmail4">{{ __('mutual.email') }}</label>
                                 <input type="email" name="email"
                                     class="form-control @error('email') is-invalid @enderror"
-                                    value="{{ old('email') }}" required id="inputEmail5">
+                                    value="{{ $superAdmin->email }}" required id="inputEmail5">
                                 <x-validation-message-component field="email" />
                             </div>
 
                             <div class="form-group col-md-6">
                                 <label for="inputName5">{{ __('mutual.name') }}</label>
                                 <input type="text" name="name"
-                                    class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}"
-                                    required id="inputName5">
+                                    class="form-control @error('name') is-invalid @enderror"
+                                    value="{{ $superAdmin->name }}" required id="inputName5">
                                 <x-validation-message-component field="name" />
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="inputPassword4">{{ __('mutual.password') }}</label>
-                                <div class="input-group">
-                                    <input type="password" name="password"
-                                        class="form-control @error('password') is-invalid @enderror" required
-                                        id="password">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text password-toggle"
-                                            onclick="togglePassword('password', this)">
-                                            <i class="fas fa-eye"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <x-validation-message-component field="password" />
-                            </div>
-
-                            <div class="form-group col-md-6">
-                                <label for="inputPasswordConfirmation">{{ __('mutual.password_confirmation') }}</label>
-                                <div class="input-group">
-                                    <input type="password" name="password_confirmation"
-                                        class="form-control @error('password_confirmation') is-invalid @enderror"
-                                        required id="password_confirmation">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text password-toggle"
-                                            onclick="togglePassword('password_confirmation', this)">
-                                            <i class="fas fa-eye"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                                <x-validation-message-component field="password_confirmation" />
                             </div>
                         </div>
 
@@ -68,7 +35,8 @@
                                     <option selected>{{ __('mutual.choose') }}...</option>
                                     @forelse (App\Enums\SuperAdminRole::cases() as $status)
                                         <option value="{{ $status->value }}"
-                                            {{ old('role') == $status->value ? 'selected' : '' }}>{{ $status->name }}
+                                            {{ $superAdmin->role == $status->value ? 'selected' : '' }}>
+                                            {{ $status->name }}
                                         </option>
                                     @empty
                                         <option>No Status Found</option>
@@ -82,9 +50,9 @@
                                 <select id="inputStatus" name="is_active" required
                                     class="form-control @error('is_active') is-invalid @enderror">
                                     <option selected>{{ __('mutual.choose') }}...</option>
-                                    <option value="1" {{ old('is_active') == 1 ? 'selected' : '' }}>
+                                    <option value="1" {{ $superAdmin->is_active == 1 ? 'selected' : '' }}>
                                         {{ __('mutual.active') }}</option>
-                                    <option value="0" {{ old('is_active') == 0 ? 'selected' : '' }}>
+                                    <option value="0" {{ $superAdmin->is_active == 0 ? 'selected' : '' }}>
                                         {{ __('mutual.inactive') }}</option>
                                 </select>
                                 <x-validation-message-component field="is_active" />
@@ -96,6 +64,12 @@
                                 <label for="inputZip">{{ __('mutual.image') }}</label>
                                 <input type="file" name="image"
                                     class="form-control @error('image') is-invalid @enderror" id="inputZip5">
+                                @if ($superAdmin->image)
+                                    <div class="mt-2">
+                                        <img src="{{ asset('storage/' . $superAdmin->image) }}" alt="Super Admin Image"
+                                            width="300">
+                                    </div>
+                                @endif
                                 <x-validation-message-component field="image" />
                             </div>
                         </div>
@@ -103,7 +77,7 @@
                         <div class="d-flex justify-content-center mt-4">
                             <a href="{{ route('super_admin.manage') }}"
                                 class="btn btn-secondary mr-3">{{ __('mutual.cancel') }}</a>
-                            <button type="submit" class="btn btn-primary">{{ __('mutual.create') }}</button>
+                            <button type="submit" class="btn btn-primary">{{ __('mutual.update') }}</button>
                         </div>
                     </form>
                 </div> <!-- /. card-body -->
