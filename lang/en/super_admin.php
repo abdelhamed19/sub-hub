@@ -9,5 +9,7 @@ return [
     'manage' => 'Manage',
     'create_new_super_admin' => 'Create New Super Admin',
     'last_login' => 'Last Login',
-    
+    'manage_clients' => 'Manage Clients',
+    'manage_clients_assistants' => 'Manage Clients Assistants',
+
 ];

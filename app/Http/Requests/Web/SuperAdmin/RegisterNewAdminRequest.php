@@ -16,9 +16,10 @@ class RegisterNewAdminRequest extends BaseRequest
      */
     public function rules(): array
     {
+        // dd(SuperAdminRole::values(), request()->all());
         return [
             'name' => ['required', 'string', 'max:255', 'min:3'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
+            'email' => ['required', 'string', 'email', 'max:255', Rule::unique('super_admins', 'email')],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'role' => ['required', Rule::in(SuperAdminRole::values())],
             'is_active' => ['required', 'boolean'],

@@ -1,0 +1,178 @@
+[
+    {
+        "name": {
+            "ar": "الجزائر",
+            "en": "Algeria"
+        },
+        "countrycode": "DZ",
+        "flag": "https://flagcdn.com/dz.svg"
+    },
+    {
+        "name": {
+            "ar": "البحرين",
+            "en": "Bahrain"
+        },
+        "countrycode": "BH",
+        "flag": "https://flagcdn.com/bh.svg"
+    },
+    {
+        "name": {
+            "ar": "جزر القمر",
+            "en": "Comoros"
+        },
+        "countrycode": "KM",
+        "flag": "https://flagcdn.com/km.svg"
+    },
+    {
+        "name": {
+            "ar": "جيبوتي",
+            "en": "Djibouti"
+        },
+        "countrycode": "DJ",
+        "flag": "https://flagcdn.com/dj.svg"
+    },
+    {
+        "name": {
+            "ar": "مصر",
+            "en": "Egypt"
+        },
+        "countrycode": "EG",
+        "flag": "https://flagcdn.com/eg.svg"
+    },
+    {
+        "name": {
+            "ar": "العراق",
+            "en": "Iraq"
+        },
+        "countrycode": "IQ",
+        "flag": "https://flagcdn.com/iq.svg"
+    },
+    {
+        "name": {
+            "ar": "الأردن",
+            "en": "Jordan"
+        },
+        "countrycode": "JO",
+        "flag": "https://flagcdn.com/jo.svg"
+    },
+    {
+        "name": {
+            "ar": "الكويت",
+            "en": "Kuwait"
+        },
+        "countrycode": "KW",
+        "flag": "https://flagcdn.com/kw.svg"
+    },
+    {
+        "name": {
+            "ar": "لبنان",
+            "en": "Lebanon"
+        },
+        "countrycode": "LB",
+        "flag": "https://flagcdn.com/lb.svg"
+    },
+    {
+        "name": {
+            "ar": "ليبيا",
+            "en": "Libya"
+        },
+        "countrycode": "LY",
+        "flag": "https://flagcdn.com/ly.svg"
+    },
+    {
+        "name": {
+            "ar": "موريتانيا",
+            "en": "Mauritania"
+        },
+        "countrycode": "MR",
+        "flag": "https://flagcdn.com/mr.svg"
+    },
+    {
+        "name": {
+            "ar": "المغرب",
+            "en": "Morocco"
+        },
+        "countrycode": "MA",
+        "flag": "https://flagcdn.com/ma.svg"
+    },
+    {
+        "name": {
+            "ar": "عمان",
+            "en": "Oman"
+        },
+        "countrycode": "OM",
+        "flag": "https://flagcdn.com/om.svg"
+    },
+    {
+        "name": {
+            "ar": "فلسطين",
+            "en": "Palestine"
+        },
+        "countrycode": "PS",
+        "flag": "https://flagcdn.com/ps.svg"
+    },
+    {
+        "name": {
+            "ar": "قطر",
+            "en": "Qatar"
+        },
+        "countrycode": "QA",
+        "flag": "https://flagcdn.com/qa.svg"
+    },
+    {
+        "name": {
+            "ar": "السعودية",
+            "en": "Saudi Arabia"
+        },
+        "countrycode": "SA",
+        "flag": "https://flagcdn.com/sa.svg"
+    },
+    {
+        "name": {
+            "ar": "الصومال",
+            "en": "Somalia"
+        },
+        "countrycode": "SO",
+        "flag": "https://flagcdn.com/so.svg"
+    },
+    {
+        "name": {
+            "ar": "السودان",
+            "en": "Sudan"
+        },
+        "countrycode": "SD",
+        "flag": "https://flagcdn.com/sd.svg"
+    },
+    {
+        "name": {
+            "ar": "سوريا",
+            "en": "Syria"
+        },
+        "countrycode": "SY",
+        "flag": "https://flagcdn.com/sy.svg"
+    },
+    {
+        "name": {
+            "ar": "تونس",
+            "en": "Tunisia"
+        },
+        "countrycode": "TN",
+        "flag": "https://flagcdn.com/tn.svg"
+    },
+    {
+        "name": {
+            "ar": "الإمارات العربية المتحدة",
+            "en": "United Arab Emirates"
+        },
+        "countrycode": "AE",
+        "flag": "https://flagcdn.com/ae.svg"
+    },
+    {
+        "name": {
+            "ar": "اليمن",
+            "en": "Yemen"
+        },
+        "countrycode": "YE",
+        "flag": "https://flagcdn.com/ye.svg"
+    }
+]

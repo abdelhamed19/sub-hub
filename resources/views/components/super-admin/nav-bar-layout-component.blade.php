@@ -16,7 +16,7 @@
             <a class="nav-link dropdown-toggle text-muted my-2" href="#" id="languageDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fe fe-globe fe-16"></i>
-                @if (session('lang') == 'ar')
+                @if (app()->getLocale() == 'ar')
                     العربية
                 @else
                     English
@@ -38,15 +38,15 @@
                 role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="avatar avatar-sm mt-2">
                     <img src="{{ asset('storage/' . Auth::guard('super_admin')->user()->image) ?? '' }}" alt="..."
-                        class="avatar-img rounded-circle">
+                        class="avatar-img rounded-circle" style="height: 32px;">
                 </span>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="/admin/profile">{{ __('admin.profile') }}</a>
-                <a class="dropdown-item" href="#">{{ __('admin.settings') }}</a>
+                <a class="dropdown-item" href="/admin/profile">{{ __('mutual.profile') }}</a>
+                <a class="dropdown-item" href="#">{{ __('mutual.settings') }}</a>
                 <a class="dropdown-item" href=""
                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                    {{ __('admin.logout') }}
+                    {{ __('mutual.logout') }}
                 </a>
                 <form id="logout-form" action="{{ route('super_admin.auth.logout') }}" method="POST"
                     style="display: none;">

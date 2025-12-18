@@ -1,4 +1,5 @@
 <x-super-admin.super-admin-layout-component :title="__('Create New Super Admin')">
+    <x-super-admin.flash-message-component />
     <div class="row">
         <div class="col-md-12">
             <div class="card shadow mb-4">

@@ -1,5 +1,5 @@
 <x-super-admin.super-admin-layout-component :title="__('super_admin.clients')">
-
+    <x-super-admin.flash-message-component />
     <x-table-component :title="__('super_admin.clients')" :createRoute="'super_admin.client.create'">
 
         <table class="table table-bordered">
@@ -35,16 +35,22 @@
                         <td>{{ $client->email }}</td>
                         <td>{{ $client->phone }}</td>
                         <td>{{ $client->city }}</td>
-                        <td>{{ $client->business_type }}</td>
+                        <td>{{ __('mutual.' . $client->business_type) }}</td>
                         <td><x-status-component :isActive="$client->is_active" /></td>
                         <td><button class="btn btn-sm dropdown-toggle more-horizontal" type="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="text-muted sr-only">Action</span>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#">{{ __('mutual.edit') }}</a>
-                                <a class="dropdown-item" href="#">{{ __('mutual.delete') }}</a>
-                                <a class="dropdown-item" href="#">{{ __('mutual.show') }}</a>
+                                <a class="dropdown-item"
+                                    href="{{ route('super_admin.client.edit', $client->id) }}">{{ __('mutual.edit') }}</a>
+                                <a class="dropdown-item text-danger" href="javascript:void(0)"
+                                    data-name="{{ $client->name }}"
+                                    data-action="super-admin/client/{{ $client->id }}/delete"
+                                    onclick="confirmDelete(this)">
+                                    {{ __('mutual.delete') }}
+                                    <a class="dropdown-item"
+                                        href="{{ route('super_admin.client.show', $client->id) }}">{{ __('mutual.show') }}</a>
                             </div>
                         </td>
                     </tr>

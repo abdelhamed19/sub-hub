@@ -6,9 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\SuperAdmin\RegisterNewAdminRequest;
 use App\Http\Requests\Web\SuperAdmin\UpdateExistingSuperAdminRequest;
 use App\Models\SuperAdmin;
-use App\Services\ImageUploadService;
 use App\Traits\UploadTrait;
-use Illuminate\Http\Request;
 
 class SuperAdminManageController extends Controller
 {

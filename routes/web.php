@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
@@ -25,3 +26,9 @@ Route::get('/lang/{lang}', function ($lang) {
     }
     return redirect()->back();
 })->name('lang.switch');
+
+Route::get('countries', function () {
+    return Cache::rememberForever('countries_list', function () {
+        return \App\Models\Country::all();
+    });
+});

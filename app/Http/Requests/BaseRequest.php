@@ -38,6 +38,7 @@ class BaseRequest extends FormRequest
             'min' => __('validation.min.string'),
             'max' => __('validation.max.string'),
             'in' => __('validation.in'),
+            
         ];
     }
 }

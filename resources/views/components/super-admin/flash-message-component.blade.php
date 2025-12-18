@@ -33,3 +33,13 @@
         </div>
     @endif
 </div>
+
+<script>
+    // Auto-hide flash messages after 5 seconds
+    setTimeout(function() {
+        const alerts = document.querySelectorAll('.alert');
+        alerts.forEach(function(alert) {
+            alert.style.display = 'none';
+        });
+    }, 2000);
+</script>

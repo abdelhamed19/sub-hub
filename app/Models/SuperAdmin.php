@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use App\Traits\UploadTrait;
+use App\Enums\SuperAdminRole;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -44,8 +46,24 @@ class SuperAdmin extends Authenticatable
 
     protected static function booted()
     {
+        static::creating(function ($superAdmin) {
+            $currentUser = Auth::guard('super_admin')->user();
+            if ($superAdmin->role === SuperAdminRole::SUPER->value) {
+                if ($currentUser->role !== SuperAdminRole::SUPER->value) {
+                    abort(403, __('mutual.unauthorized_action'));
+                }
+            }
+        });
         static::deleted(function ($superAdmin) {
             $superAdmin->deleteImage($superAdmin->image);
+        });
+        static::updating(function ($superAdmin) {
+            $currentUser = Auth::guard('super_admin')->user();
+            if ($superAdmin->isDirty('role') && $superAdmin->role === SuperAdminRole::SUPER->value) {
+                if ($currentUser->role !== SuperAdminRole::SUPER->value) {
+                    abort(403, __('mutual.unauthorized_action'));
+                }
+            }
         });
     }
 }

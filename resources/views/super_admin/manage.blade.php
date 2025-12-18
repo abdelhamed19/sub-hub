@@ -1,5 +1,5 @@
 <x-super-admin.super-admin-layout-component :title="__('super_admin.super_admin')">
-
+    <x-super-admin.flash-message-component />
     <x-table-component :title="__('super_admin.super_admin')" :createRoute="'super_admin.create'">
 
         <table class="table table-bordered">

@@ -25,7 +25,8 @@
                 <a href="#superAdminsMenu" data-toggle="collapse" aria-expanded="false"
                     class="dropdown-toggle nav-link">
                     <i class="fe fe-users fe-16"></i>
-                    <span class="ml-3 item-text">{{ __('super_admin.super_admin') }}</span><span class="sr-only">(current)</span>
+                    <span class="ml-3 item-text">{{ __('super_admin.super_admin') }}</span><span
+                        class="sr-only">(current)</span>
                 </a>
                 <ul class="collapse list-unstyled pl-4 w-100" id="superAdminsMenu">
                     <li class="nav-item active">
@@ -38,12 +39,20 @@
             <li class="nav-item dropdown">
                 <a href="#clientsMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
                     <i class="fe fe-user-plus fe-16"></i>
-                    <span class="ml-3 item-text">{{ __('super_admin.clients') }}</span><span class="sr-only">(current)</span>
+                    <span class="ml-3 item-text">{{ __('super_admin.clients') }}</span><span
+                        class="sr-only">(current)</span>
                 </a>
                 <ul class="collapse list-unstyled pl-4 w-100" id="clientsMenu">
                     <li class="nav-item active">
                         <a class="nav-link pl-3" href="{{ route('super_admin.client.manage') }}"><span
-                                class="ml-1 item-text">{{ __('super_admin.manage') }}</span></a>
+                                class="ml-1 item-text">{{ __('super_admin.manage_clients') }}</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item active">
+                        <a class="nav-link pl-3" href=""><span
+                                class="ml-1 item-text">{{ __('super_admin.manage_clients_assistants') }}</span>
+                        </a>
                     </li>
                 </ul>
             </li>
