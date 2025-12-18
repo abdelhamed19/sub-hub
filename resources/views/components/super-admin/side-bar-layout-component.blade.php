@@ -50,7 +50,7 @@
                     </li>
 
                     <li class="nav-item active">
-                        <a class="nav-link pl-3" href=""><span
+                        <a class="nav-link pl-3" href="{{ route('super_admin.client_assistant.manage') }}"><span
                                 class="ml-1 item-text">{{ __('super_admin.manage_clients_assistants') }}</span>
                         </a>
                     </li>

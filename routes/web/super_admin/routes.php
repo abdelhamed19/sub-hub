@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Auth\SuperAdminController;
 use App\Http\Controllers\Web\SuperAdmin\ClientManageController;
 use App\Http\Controllers\Web\SuperAdmin\SuperAdminManageController;
+use App\Http\Controllers\Web\SuperAdmin\ClientAssistantManageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +41,14 @@ Route::middleware(['auth:super_admin'])->prefix('/super-admin')
         Route::delete('/client/{client}/delete', [ClientManageController::class, 'delete'])->name('super_admin.client.delete');
         Route::post('/client/{id}/restore', [ClientManageController::class, 'restore'])->name('super_admin.client.restore');
         Route::delete('/client/{id}/force-delete', [ClientManageController::class, 'forceDelete'])->name('super_admin.client.force_delete');
+
+        Route::get('/client/client-assistant/manage', [ClientAssistantManageController::class, 'index'])->name('super_admin.client_assistant.manage');
+        Route::get('/client/client-assistant/create', [ClientAssistantManageController::class, 'create'])->name('super_admin.client_assistant.create');
+        Route::post('/client/client-assistant/store', [ClientAssistantManageController::class, 'store'])->name('super_admin.client_assistant.store');
+        Route::get('/client/client-assistant/{assistant}/show', [ClientAssistantManageController::class, 'show'])->name('super_admin.client_assistant.show');
+        Route::get('/client/client-assistant/{assistant}/edit', [ClientAssistantManageController::class, 'edit'])->name('super_admin.client_assistant.edit');
+        Route::put('/client/client-assistant/{assistant}/update', [ClientAssistantManageController::class, 'update'])->name('super_admin.client_assistant.update');
+        Route::delete('/client/client-assistant/{assistant}/delete', [ClientAssistantManageController::class, 'delete'])->name('super_admin.client_assistant.delete');
     });
 
 // Auth

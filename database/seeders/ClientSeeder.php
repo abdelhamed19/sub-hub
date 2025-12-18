@@ -23,7 +23,8 @@ class ClientSeeder extends Seeder
             'name' => Str::random(10),
             'email' => 'assist1@client.com',
             'password' => 'password',
-            'role' => ClientAssistantRole::ADMIN
+            'role' => ClientAssistantRole::ADMIN,
+            'phone' => '1234567890',
         ]);
 
         ClientAssistant::create([
@@ -31,7 +32,8 @@ class ClientSeeder extends Seeder
             'name' => Str::random(10),
             'email' => 'assist2@client.com',
             'password' => 'password',
-            'role' => ClientAssistantRole::MANAGER
+            'role' => ClientAssistantRole::MANAGER,
+            'phone' => '0987654321',
         ]);
 
         ClientAssistant::create([
@@ -39,7 +41,8 @@ class ClientSeeder extends Seeder
             'name' => Str::random(10),
             'email' => 'assist3@client.com',
             'password' => 'password',
-            'role' => ClientAssistantRole::VIEWER
+            'role' => ClientAssistantRole::VIEWER,
+            'phone' => '1122334455',
         ]);
     }
 }

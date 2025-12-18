@@ -13,7 +13,8 @@ class SuperAdminManageController extends Controller
     use UploadTrait;
     public function index()
     {
-        $superAdmins = SuperAdmin::search(request('search'))->paginate(10);
+        $superAdmins = SuperAdmin::search(request('search'))
+            ->paginate(10);
         return view('super_admin.manage', compact('superAdmins'));
     }
     public function create()
