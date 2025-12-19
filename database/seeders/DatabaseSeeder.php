@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Plan;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,7 +16,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             SuperAdminSeeder::class,
             ClientSeeder::class,
-            CountrySeeder::class
+            CountrySeeder::class,
+            PlanSeeder::class,
+            SubscriptionSeeder::class,
         ]);
     }
 }

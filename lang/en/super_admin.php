@@ -15,5 +15,15 @@ return [
     'edit_new_client_assistant' => 'Edit Client Assistant',
     'show_new_client_assistant' => 'Show Client Assistant',
     'clients_assistants' => 'Clients Assistants',
-
+    'plans_and_subscriptions' => 'Plans & Subscriptions',
+    'plans' => 'Plans',
+    'manage_plans' => 'Manage Plans',
+    'subscriptions' => 'Subscriptions',
+    'manage_subscriptions' => 'Manage Subscriptions',
+    'billings' => 'Billings',
+    'billing_list' => 'Billing List',
+    'manage_billings' => 'Manage Billings',
+    'show_plan' => 'Show Plan',
+    'edit_plan' => 'Edit Plan',
+    'create_plan' => 'Create Plan',
 ];

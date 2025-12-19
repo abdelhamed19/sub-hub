@@ -2,8 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\Auth\SuperAdminController;
+use App\Http\Controllers\Web\SuperAdmin\BillingManageController;
+use App\Http\Controllers\Web\SuperAdmin\PlanManageController;
 use App\Http\Controllers\Web\SuperAdmin\ClientManageController;
 use App\Http\Controllers\Web\SuperAdmin\SuperAdminManageController;
+use App\Http\Controllers\Web\SuperAdmin\SubscriptionManageController;
 use App\Http\Controllers\Web\SuperAdmin\ClientAssistantManageController;
 
 /*
@@ -49,6 +52,30 @@ Route::middleware(['auth:super_admin'])->prefix('/super-admin')
         Route::get('/client/client-assistant/{assistant}/edit', [ClientAssistantManageController::class, 'edit'])->name('super_admin.client_assistant.edit');
         Route::put('/client/client-assistant/{assistant}/update', [ClientAssistantManageController::class, 'update'])->name('super_admin.client_assistant.update');
         Route::delete('/client/client-assistant/{assistant}/delete', [ClientAssistantManageController::class, 'delete'])->name('super_admin.client_assistant.delete');
+
+        Route::get('/plans/manage', [PlanManageController::class, 'index'])->name('super_admin.plan.manage');
+        Route::get('/show/plans/{plan}', [PlanManageController::class, 'show'])->name('super_admin.plan.show');
+        Route::get('/edit/plans/{plan}', [PlanManageController::class, 'edit'])->name('super_admin.plan.edit');
+        Route::get('/create/plans/create', [PlanManageController::class, 'create'])->name('super_admin.plan.create');
+        Route::post('/plans/store', [PlanManageController::class, 'store'])->name('super_admin.plan.store');
+        Route::put('/plans/{plan}/update', [PlanManageController::class, 'update'])->name('super_admin.plan.update');
+        Route::delete('/plans/{plan}/delete', [PlanManageController::class, 'destroy'])->name('super_admin.plan.delete');
+
+        Route::get('/subscriptions/manage', [SubscriptionManageController::class, 'index'])->name('super_admin.subscription.manage');
+        Route::get('/subscriptions/{subscription}', [SubscriptionManageController::class, 'show'])->name('super_admin.subscription.show');
+        Route::get('/subscriptions/{subscription}/edit', [SubscriptionManageController::class, 'edit'])->name('super_admin.subscription.edit');
+        Route::get('/subscriptions/create', [SubscriptionManageController::class, 'create'])->name('super_admin.subscription.create');
+        Route::post('/subscriptions/store', [SubscriptionManageController::class, 'store'])->name('super_admin.subscription.store');
+        Route::put('/subscriptions/{subscription}/update', [SubscriptionManageController::class, 'update'])->name('super_admin.subscription.update');
+        Route::delete('/subscriptions/{subscription}/delete', [SubscriptionManageController::class, 'destroy'])->name('super_admin.subscription.delete');
+
+        Route::get('/billings/manage', [BillingManageController::class, 'index'])->name('super_admin.billing.manage');
+        Route::get('/billings/{billing}', [BillingManageController::class, 'show'])->name('super_admin.billing.show');
+        Route::get('/billings/{billing}/edit', [BillingManageController::class, 'edit'])->name('super_admin.billing.edit');
+        Route::get('/billings/create', [BillingManageController::class, 'create'])->name('super_admin.billing.create');
+        Route::post('/billings/store', [BillingManageController::class, 'store'])->name('super_admin.billing.store');
+        Route::put('/billings/{billing}/update', [BillingManageController::class, 'update'])->name('super_admin.billing.update');
+        Route::delete('/billings/{billing}/delete', [BillingManageController::class, 'destroy'])->name('super_admin.billing.delete');
     });
 
 // Auth

@@ -68,4 +68,11 @@ return
     'settings' => 'الإعدادات',
     'logout' => 'تسجيل الخروج',
     'client' => 'العميل',
+    'duration_days' => 'المدة (أيام)',
+    'price' => 'السعر',
+    'compare_price' => 'سعر المقارنة',
+    'features' => 'الميزات',
+    'type' => 'النوع',
+    'add_feature' => 'إضافة ميزة',
+    'description' => 'الوصف',
 ];

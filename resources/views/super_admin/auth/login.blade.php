@@ -50,6 +50,7 @@
                             </div>
                             <div class="d-grid">
                                 <button type="submit" class="btn btn-primary">{{ __('auth.login') }}</button>
+                                <a href="{{ route('befor_auth') }}" role="button" class="btn btn-secondary mt-2">Back</a>
                             </div>
                         </form>
 

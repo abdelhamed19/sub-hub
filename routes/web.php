@@ -19,6 +19,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/hello/dear', function () {
+    return view('befor_auth');
+})->name('befor_auth');
+
 Route::get('/lang/{lang}', function ($lang) {
     $available = ['en', 'ar'];
     if (in_array($lang, $available)) {

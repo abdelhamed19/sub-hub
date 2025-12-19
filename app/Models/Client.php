@@ -44,6 +44,21 @@ class Client extends Model
         return $query->where('is_active', true);
     }
 
+    public function subscription()
+    {
+        return $this->hasOne(Subscription::class);
+    }
+
+    public function plan()
+    {
+        return $this->hasOneThrough(Plan::class, Subscription::class, 'client_id', 'id', 'id', 'plan_id');
+    }
+
+    public function subscriptionBillings()
+    {
+        return $this->hasManyThrough(SubscriptionBilling::class, Subscription::class, 'client_id', 'subscription_id', 'id', 'id');
+    }
+
     public function scopeSearch($query, $term)
     {
         $term = "%$term%";

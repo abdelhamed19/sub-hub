@@ -54,8 +54,52 @@
                                 class="ml-1 item-text">{{ __('super_admin.manage_clients_assistants') }}</span>
                         </a>
                     </li>
+
+                    <li class="nav-item active">
+                        <a class="nav-link pl-3" href="{{ route('super_admin.client_assistant.manage') }}"><span
+                                class="ml-1 item-text">{{ __('super_admin.manage_clients_assistants') }}</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
+
+            <li class="nav-item dropdown">
+                <a href="#subsMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                    <i class="fe fe-credit-card fe-16"></i>
+                    <span class="ml-3 item-text">{{ __('super_admin.plans_and_subscriptions') }}</span><span
+                        class="sr-only">(current)</span>
+                </a>
+                <ul class="collapse list-unstyled pl-4 w-100" id="subsMenu">
+                    <li class="nav-item active">
+                        <a class="nav-link pl-3" href="{{ route('super_admin.plan.manage') }}"><span
+                                class="ml-1 item-text">{{ __('super_admin.manage_plans') }}</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link pl-3" href="{{ route('super_admin.subscription.manage') }}"><span
+                                class="ml-1 item-text">{{ __('super_admin.manage_subscriptions') }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a href="#billsMenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle nav-link">
+                    <i class="fe fe-dollar-sign fe-16"></i>
+                    <span class="ml-3 item-text">{{ __('super_admin.billings') }}</span><span
+                        class="sr-only">(current)</span>
+                </a>
+                <ul class="collapse list-unstyled pl-4 w-100" id="billsMenu">
+                    <li class="nav-item active">
+                        <a class="nav-link pl-3" href="{{ route('super_admin.billing.manage') }}"><span
+                                class="ml-1 item-text">{{ __('super_admin.manage_billings') }}</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+
+
         </ul>
     </nav>
 </aside>
