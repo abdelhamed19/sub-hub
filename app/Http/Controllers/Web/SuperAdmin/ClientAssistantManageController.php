@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Web\SuperAdmin;
 
 use App\Models\Client;
 use App\Traits\UploadTrait;
-use Illuminate\Http\Request;
 use App\Models\ClientAssistant;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\SuperAdmin\CreateNewClientAssistantRequest;

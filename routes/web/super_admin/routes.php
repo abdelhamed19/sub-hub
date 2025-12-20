@@ -62,12 +62,12 @@ Route::middleware(['auth:super_admin'])->prefix('/super-admin')
         Route::delete('/plans/{plan}/delete', [PlanManageController::class, 'destroy'])->name('super_admin.plan.delete');
 
         Route::get('/subscriptions/manage', [SubscriptionManageController::class, 'index'])->name('super_admin.subscription.manage');
-        Route::get('/subscriptions/{subscription}', [SubscriptionManageController::class, 'show'])->name('super_admin.subscription.show');
-        Route::get('/subscriptions/{subscription}/edit', [SubscriptionManageController::class, 'edit'])->name('super_admin.subscription.edit');
-        Route::get('/subscriptions/create', [SubscriptionManageController::class, 'create'])->name('super_admin.subscription.create');
-        Route::post('/subscriptions/store', [SubscriptionManageController::class, 'store'])->name('super_admin.subscription.store');
-        Route::put('/subscriptions/{subscription}/update', [SubscriptionManageController::class, 'update'])->name('super_admin.subscription.update');
-        Route::delete('/subscriptions/{subscription}/delete', [SubscriptionManageController::class, 'destroy'])->name('super_admin.subscription.delete');
+        Route::get('/subscription/{subscription}/show', [SubscriptionManageController::class, 'show'])->name('super_admin.subscription.show');
+        Route::get('/subscription/{subscription}/edit', [SubscriptionManageController::class, 'edit'])->name('super_admin.subscription.edit');
+        Route::get('/subscription/create', [SubscriptionManageController::class, 'create'])->name('super_admin.subscription.create');
+        Route::post('/subscription/store', [SubscriptionManageController::class, 'store'])->name('super_admin.subscription.store');
+        Route::put('/subscription/{subscription}/update', [SubscriptionManageController::class, 'update'])->name('super_admin.subscription.update');
+        Route::delete('/subscription/{subscription}/delete', [SubscriptionManageController::class, 'destroy'])->name('super_admin.subscription.delete');
 
         Route::get('/billings/manage', [BillingManageController::class, 'index'])->name('super_admin.billing.manage');
         Route::get('/billings/{billing}', [BillingManageController::class, 'show'])->name('super_admin.billing.show');

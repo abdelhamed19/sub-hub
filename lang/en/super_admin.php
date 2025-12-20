@@ -26,4 +26,6 @@ return [
     'show_plan' => 'Show Plan',
     'edit_plan' => 'Edit Plan',
     'create_plan' => 'Create Plan',
+    'plan' => 'Plan',
+    'subscription_details' => 'Subscription Details',
 ];

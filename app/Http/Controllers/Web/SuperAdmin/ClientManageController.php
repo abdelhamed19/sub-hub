@@ -2,29 +2,41 @@
 
 namespace App\Http\Controllers\Web\SuperAdmin;
 
-use App\Enums\IndustryType;
 use App\Models\Client;
+use App\Models\Country;
+use App\Enums\IndustryType;
 use App\Traits\UploadTrait;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
 use App\Http\Requests\Web\SuperAdmin\CreateNewClientRequest;
 use App\Http\Requests\Web\SuperAdmin\UpdateExistingClientRequest;
+use App\Services\LocationService;
 
 class ClientManageController extends Controller
 {
     use UploadTrait;
+    public function __construct(private LocationService $locationService) {}
     public function index()
     {
-        $clients = Client::search(request('search'))
-            ->orderBy('created_at', 'desc')
-            ->select('id', 'name', 'email', 'phone', 'city', 'business_type', 'is_active', 'created_at')
-            ->paginate(10);
+        $search = request('search');
+        $page = request('page', 1);
+        $cacheKey = Client::getCacheKeyForList(Client::$cacheTag, "search={$search}", "page={$page}");
+
+        $clients = Cache::tags(Client::$cacheTag)->remember($cacheKey, now()->addMinutes(10), function () use ($search) {
+            return Client::search($search, Client::$searchableFields)
+                ->orderByDesc('created_at')
+                ->select('id', 'name', 'email', 'phone', 'city', 'business_type', 'is_active', 'created_at')
+                ->paginate(10);
+        });
+
         return view('super_admin.clients.index', compact('clients'));
     }
 
     public function create()
     {
-        return view('super_admin.clients.create');
+        $countries = $this->locationService->getCountriesList();
+        return view('super_admin.clients.create', compact('countries'));
     }
 
     public function store(CreateNewClientRequest $request)
@@ -43,7 +55,8 @@ class ClientManageController extends Controller
 
     public function show(Client $client)
     {
-        return view('super_admin.clients.show', compact('client'));
+        $countries = $this->locationService->getCountriesList();
+        return view('super_admin.clients.show', compact('client', 'countries'));
     }
 
     public function delete(Client $client)
@@ -54,7 +67,8 @@ class ClientManageController extends Controller
 
     public function edit(Client $client)
     {
-        return view('super_admin.clients.edit', compact('client'));
+        $countries = $this->locationService->getCountriesList();
+        return view('super_admin.clients.edit', compact('client', 'countries'));
     }
 
     public function update(UpdateExistingClientRequest $request, Client $client)

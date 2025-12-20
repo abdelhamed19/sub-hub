@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Subscription extends Model
+class Subscription extends BaseModel
 {
     use HasFactory, SoftDeletes;
+    public static $cacheTag = 'subscriptions';
     protected $fillable = [
         'plan_id',
         'client_id',
@@ -16,6 +18,27 @@ class Subscription extends Model
         'end_date',
         'is_active',
     ];
+
+    public function scopeSearch($query, $term, $fields = [])
+    {
+        if (!$term) {
+            return $query;
+        }
+
+        $term = "%{$term}%";
+
+        return $query->where(function ($q) use ($term) {
+            $q->where('is_active', 'like', $term);
+            $q->orWhere('start_date', 'like', $term);
+            $q->orWhere('end_date', 'like', $term); 
+            $q->whereHas('plan', function ($plan) use ($term) {
+                $plan->where('name', 'like', $term);
+            })->orWhereHas('client', function ($client) use ($term) {
+                $client->where('name', 'like', $term)
+                    ->orWhere('email', 'like', $term);
+            });
+        });
+    }
 
     public function plan()
     {
@@ -30,5 +53,16 @@ class Subscription extends Model
     public function billings()
     {
         return $this->hasMany(SubscriptionBilling::class);
+    }
+
+    protected static function booted()
+    {
+        static::saving(function ($plan) {
+            Cache::tags(['subscriptions', 'clients'])->flush();
+        });
+
+        static::deleted(function ($plan) {
+            Cache::tags(['subscriptions', 'clients'])->flush();
+        });
     }
 }

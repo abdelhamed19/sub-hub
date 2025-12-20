@@ -3,16 +3,16 @@
 namespace App\Models;
 
 use App\Traits\UploadTrait;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Client extends Model
+class Client extends BaseModel
 {
     use HasFactory, SoftDeletes, UploadTrait;
     const LOGO_DIR = 'clients/logos';
+    public static $cacheTag = 'clients';
+    public static $searchableFields = ['name', 'legal_name', 'email'];
     protected $fillable = [
         'name',
         'email',
@@ -39,11 +39,6 @@ class Client extends Model
         return $this->hasMany(ClientAssistant::class);
     }
 
-    public function scopeActive($query)
-    {
-        return $query->where('is_active', true);
-    }
-
     public function subscription()
     {
         return $this->hasOne(Subscription::class);
@@ -59,20 +54,20 @@ class Client extends Model
         return $this->hasManyThrough(SubscriptionBilling::class, Subscription::class, 'client_id', 'subscription_id', 'id', 'id');
     }
 
-    public function scopeSearch($query, $term)
-    {
-        $term = "%$term%";
-        $query->where(function ($query) use ($term) {
-            $query->where('name', 'like', $term)
-                ->orWhere('legal_name', 'like', $term)
-                ->orWhere('email', 'like', $term);
-        });
-    }
-
     protected static function booted()
     {
         static::deleted(function ($client) {
             $client->deleteImage($client->logo);
+            Cache::tags($client::$cacheTag)->flush();
         });
+
+        static::saving(function ($client) {
+            Cache::tags($client::$cacheTag)->flush();
+        });
+    }
+
+    public function getLogoAttribute($value)
+    {
+        return $this->getImageUrl($value);
     }
 }

@@ -50,4 +50,9 @@ class ClientAssistant extends Authenticatable
             $clientAssistant->deleteImage($clientAssistant->image);
         });
     }
+
+    public function getImageAttribute($value)
+    {
+        return $this->getImageUrl($value);
+    }
 }

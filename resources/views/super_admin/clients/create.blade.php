@@ -72,7 +72,7 @@
                                 <select id="inputCountry5" name="country" required
                                     class="form-control @error('country') is-invalid @enderror">
                                     <option selected>{{ __('mutual.choose') }}...</option>
-                                    @foreach (Cache::get('countries_list') as $country)
+                                    @foreach ($countries as $country)
                                         <option value="{{ $country->code }}"
                                             {{ old('country') == $country->code ? 'selected' : '' }}>
                                             {{ $country->name }}

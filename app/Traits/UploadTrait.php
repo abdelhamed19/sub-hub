@@ -28,4 +28,15 @@ trait UploadTrait
         $this->deleteImage($oldImagePath);
         return $this->uploadImage($newImage, $directory);
     }
+
+    public function getImageUrl($imagePath)
+    {
+        if (!$imagePath) {
+            return null;
+        }
+        if (str_contains($imagePath, 'http://') || str_contains($imagePath, 'https://')) {
+            return $imagePath;
+        }
+        return asset('storage/' . $imagePath);
+    }
 }

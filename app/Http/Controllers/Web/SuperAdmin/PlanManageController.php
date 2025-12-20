@@ -12,14 +12,20 @@ class PlanManageController extends Controller
 {
     public function index()
     {
-        $plans = Cache::rememberForever('plans' . request('search'), function () {
-            return Plan::search(request('search'))
-                ->orderBy('created_at', 'desc')
-                ->select('id', 'name', 'price', 'compare_price',
-                'features', 'type',
-                'duration_days', 'is_active', 'created_at')
-                ->paginate(10);
-        });
+        $plans =  Plan::search(request('search'), Plan::$searchableFields)
+            ->orderBy('created_at', 'desc')
+            ->select(
+                'id',
+                'name',
+                'price',
+                'compare_price',
+                'features',
+                'type',
+                'duration_days',
+                'is_active',
+                'created_at'
+            )
+            ->paginate(10);
         return view('super_admin.plans.index', compact('plans'));
     }
 
@@ -35,7 +41,7 @@ class PlanManageController extends Controller
             Plan::create($data);
             return redirect()->route('super_admin.plan.manage')->with('success', __('mutual.create_successfully', ['attribute' => __('mutual.plan')]));
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', __('mutual.create_failed', ['attribute' => __('mutual.plan')]))->withInput();
+            return redirect()->back()->with('error', __('mutual.error_creating', ['attribute' => __('mutual.plan')]))->withInput();
         }
     }
 

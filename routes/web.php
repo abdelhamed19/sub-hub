@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
@@ -21,7 +20,7 @@ Route::get('/', function () {
 
 Route::get('/hello/dear', function () {
     return view('befor_auth');
-})->name('befor_auth');
+})->name('before_auth');
 
 Route::get('/lang/{lang}', function ($lang) {
     $available = ['en', 'ar'];
@@ -30,9 +29,3 @@ Route::get('/lang/{lang}', function ($lang) {
     }
     return redirect()->back();
 })->name('lang.switch');
-
-Route::get('countries', function () {
-    return Cache::rememberForever('countries_list', function () {
-        return \App\Models\Country::all();
-    });
-});

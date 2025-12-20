@@ -26,4 +26,9 @@ return [
     'edit_plan' => 'تعديل الخطة',
     'create_plan' => 'إنشاء خطة',
     'compare_price' => 'سعر المقارنة',
+    'plan' => 'خطة',
+    'add_new_subscription' => 'إضافة اشتراك جديد',
+    'edit_subscription' => 'تعديل الاشتراك',
+    'subscription' => 'اشتراك',
+    'subscription_details' => 'تفاصيل الاشتراك',
 ];

@@ -2,29 +2,69 @@
 
 namespace App\Http\Controllers\Web\SuperAdmin;
 
+use App\Models\Plan;
+use App\Models\Client;
 use App\Models\Subscription;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Cache;
+use App\Http\Requests\Web\SuperAdmin\CreateNewSubscriptionRequest;
 
 class SubscriptionManageController extends Controller
 {
     public function index()
     {
-        $subscriptions = Cache::rememberForever('subscriptions' . request('search'), function () {
-            return Subscription::with(['plan', 'client'])
-                ->orderBy('created_at', 'desc')
-                ->paginate(10);
-        });
+        $search = request('search');
+        $page   = request('page', 1);
+
+        $cacheKey = Subscription::getCacheKeyForList(
+            Subscription::$cacheTag,
+            "search={$search}",
+            "page={$page}"
+        );
+
+        $subscriptions = Cache::tags(Subscription::$cacheTag)
+            ->remember(
+                $cacheKey,
+                now()->addMinutes(10),
+                function () use ($search) {
+                    return Subscription::search($search)
+                        ->with(['plan', 'client'])
+                        ->orderByDesc('created_at')
+                        ->paginate(10);
+                }
+            );
+
         return view('super_admin.subscriptions.index', compact('subscriptions'));
     }
 
+
     public function create()
     {
-        return view('super_admin.subscriptions.create');
+        $plans = Plan::active()
+            ->select('id', 'name')
+            ->get();
+
+        $clients = Cache::tags('clients')->remember(
+            'active_clients_for_subscription',
+            now()->addMinutes(10),
+            fn() => Client::active()
+                ->select('id', 'name', 'legal_name')
+                ->get()
+        );
+
+        return view('super_admin.subscriptions.create', compact('plans', 'clients'));
     }
 
-    public function store() {}
+    public function store(CreateNewSubscriptionRequest $request)
+    {
+        $data = $request->validated();
+        try {
+            Subscription::create($data);
+            return redirect()->route('super_admin.subscription.manage')->with('success', __('mutual.create_successfully'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', __('mutual.error_creating') . ': ' . $e->getMessage())->withInput();
+        }
+    }
 
     public function edit(Subscription $subscription)
     {

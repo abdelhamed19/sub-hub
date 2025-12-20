@@ -4,90 +4,103 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card shadow mb-4">
-                <div class="card-header">
-                    <strong class="card-title">{{ __('super_admin.show_new_client_assistant') }}</strong>
+                <!-- Header مع الصورة والاسم والحالة -->
+                <div class="card-header py-3 d-flex align-items-center">
+                    @if ($assistant->image)
+                        <img src="{{ $assistant->image }}" alt="Assistant Image" class="rounded mr-3"
+                            width="80" height="80" style="object-fit: cover;">
+                    @else
+                        <div class="bg-primary text-white rounded d-flex align-items-center justify-content-center mr-3"
+                            style="width:80px; height:80px; font-size:32px;">
+                            {{ strtoupper(substr($assistant->name, 0, 2)) }}
+                        </div>
+                    @endif
+
+                    <div>
+                        <strong class="card-title mb-0 h4">{{ $assistant->name }}</strong>
+                        <p class="text-muted mb-0">{{ __('mutual.role') }}: {{ $assistant->role }}</p>
+                    </div>
+
+                    <div class="ml-auto">
+                        <span class="badge badge-lg {{ $assistant->is_active ? 'badge-success' : 'badge-danger' }}">
+                            {{ $assistant->is_active ? __('mutual.active') : __('mutual.inactive') }}
+                        </span>
+                    </div>
                 </div>
+
                 <div class="card-body">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="inputEmail4">{{ __('mutual.email') }}</label>
-                            <input type="email" name="email" class="form-control"
-                                value="{{ old('email', $assistant->email) }}" required id="inputEmail5">
+
+                    <!-- معلومات الاتصال -->
+                    <h6 class="text-primary mb-3">{{ __('mutual.contact_information') }}</h6>
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h6 class="text-muted mb-1">{{ __('mutual.email') }}</h6>
+                            <p class="font-weight-bold mb-0">
+                                <a href="mailto:{{ $assistant->email }}">{{ $assistant->email }}</a>
+                            </p>
                         </div>
 
-                        <div class="form-group col-md-6">
-                            <label for="inputName5">{{ __('mutual.name') }}</label>
-                            <input type="text" name="name" class="form-control"
-                                value="{{ old('name', $assistant->name) }}" id="inputName5">
-
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-12">
-                            <label for="inputStatus">{{ __('mutual.client') }}</label>
-                            <select id="inputStatus" name="client_id" class="form-control">
-                                <option selected>
-                                    {{ $assistant->client->name }} ({{ $assistant->client->legal_name }})
-                                </option>
-                            </select>
+                        <div class="col-md-6">
+                            <h6 class="text-muted mb-1">{{ __('mutual.phone') }}</h6>
+                            <p class="font-weight-bold mb-0">
+                                {{ $assistant->phone ? $assistant->phone : '<span class="text-muted">—</span>' }}
+                            </p>
                         </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="inputState">{{ __('mutual.role') }}</label>
-                            <select id="inputState5" name="role" class="form-control">
-                                <option selected>
-                                    {{ old('role', $assistant->role) }}
-                                </option>
-                            </select>
+                    <hr>
 
+                    <!-- العميل والدور -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h6 class="text-muted mb-1">{{ __('mutual.client') }}</h6>
+                            <p class="font-weight-bold mb-0">
+                                {{ $assistant->client->name }}
+                                <small class="text-muted">({{ $assistant->client->legal_name }})</small>
+                            </p>
                         </div>
 
-                        <div class="form-group col-md-6">
-                            <label for="inputStatus">{{ __('mutual.status') }}</label>
-                            <select id="inputStatus" class="form-control">
-                                <option value="1"
-                                    {{ old('is_active', $assistant->is_active) == 1 ? 'selected' : '' }}>
-                                    {{ __('mutual.active') }}</option>
-                                <option value="0"
-                                    {{ old('is_active', $assistant->is_active) == 0 ? 'selected' : '' }}>
-                                    {{ __('mutual.inactive') }}</option>
-                            </select>
+                        <div class="col-md-6">
+                            <h6 class="text-muted mb-1">{{ __('mutual.role') }}</h6>
+                            <p class="font-weight-bold mb-0 text-capitalize">
+                                {{ $assistant->role ?: '<span class="text-muted">—</span>' }}
+                            </p>
                         </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="inputZip">{{ __('mutual.image') }}</label>
-                            <input type="file" name="image" class="form-control " id="inputZip5">
-                            @if ($assistant->image)
-                                <div class="mt-2">
-                                    <img src="{{ asset('storage/' . $assistant->image) }}" alt="Client Assistant Image"
-                                        width="100" height="100">
-                                </div>
-                            @endif
+                    <hr>
 
+                    <!-- تاريخ الإنشاء (اختياري لكن مفيد) -->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-muted mb-1">{{ __('mutual.created_at') }}</h6>
+                            <p class="font-weight-bold mb-0 text-muted">
+                                {{ $assistant->created_at->format('d/m/Y h:i A') }}
+                            </p>
                         </div>
 
-                        <div class="form-group col-md-6">
-                            <label for="inputPhone5">{{ __('mutual.phone') }}</label>
-                            <input type="number" name="phone"
-                                class="form-control @error('phone') is-invalid @enderror"
-                                value="{{ old('phone', $assistant->phone) }}" required id="inputPhone5">
+                        <div class="col-md-6">
+                            <h6 class="text-muted mb-1">{{ __('mutual.updated_at') }}</h6>
+                            <p class="font-weight-bold mb-0 text-muted">
+                                {{ $assistant->updated_at->format('d/m/Y h:i A') }}
+                            </p>
                         </div>
                     </div>
 
-                    <div class="d-flex justify-content-center mt-3">
-                        <a href="{{ route('super_admin.client_assistant.manage') }}"
-                            class="btn btn-secondary mr-3">{{ __('mutual.cancel') }}
-                        </a>
+                </div>
 
-                    </div>
-                </div> <!-- /. card-body -->
-            </div> <!-- /. card -->
-        </div> <!-- /. col -->
-    </div> <!-- /. end-section -->
+                <!-- الأزرار في الأسفل -->
+                <div class="card-footer d-flex justify-content-center py-4 bg-light">
+                    <a href="{{ route('super_admin.client_assistant.edit', $assistant->id) }}"
+                        class="btn btn-warning mr-3">
+                        <i class="fe fe-edit"></i> {{ __('mutual.edit') }}
+                    </a>
 
+                    <a href="{{ route('super_admin.client_assistant.manage') }}" class="btn btn-secondary">
+                        <i class="fe fe-list"></i> {{ __('super_admin.manage_clients_assistants') }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </x-super-admin.super-admin-layout-component>

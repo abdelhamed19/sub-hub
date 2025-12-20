@@ -1,7 +1,6 @@
 <x-super-admin.super-admin-layout-component :title="__('super_admin.clients')">
     <x-super-admin.flash-message-component />
     <x-table-component :title="__('super_admin.clients')" :createRoute="'super_admin.client.create'">
-
         <table class="table table-bordered">
             <thead>
                 <tr role="row">
@@ -62,6 +61,8 @@
 
             </tbody>
         </table>
+        {{ $clients->links() }}
     </x-table-component>
+    {{-- Pagination --}}
 
 </x-super-admin.super-admin-layout-component>

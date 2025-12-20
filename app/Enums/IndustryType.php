@@ -23,6 +23,11 @@ enum IndustryType: string
         return array_map(fn($case) => $case->value, self::cases());
     }
 
+    public function value(): string
+    {
+        return $this->value;
+    }
+
     public function label(): string
     {
         return match ($this) {
