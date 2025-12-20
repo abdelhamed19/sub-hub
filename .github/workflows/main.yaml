@@ -1,0 +1,27 @@
+name: Notify Telegram on Push to Main
+
+on:
+  push:
+    branches: [main]
+
+
+jobs:
+  test-first-job:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Notify on Telegram
+      uses: appleboy/telegram-action@v0.1.1
+      with:
+          to: ${{ secrets.TELEGRAM_CHAT_ID }}
+          token: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          message: |
+            A new push to the main branch has been detected!
+            Repository: ${{ github.repository }}
+            Committer: ${{ github.actor }}
+            Commit Message: ${{ github.event.head_commit.message }}
+            Commit URL: ${{ github.event.head_commit.url }}
