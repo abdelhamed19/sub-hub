@@ -17,7 +17,7 @@ class ClientAssistantManageController extends Controller
         $assistants = ClientAssistant::search(request('search'))
             ->with('client')
             ->orderBy('created_at', 'desc')
-            ->select('id', 'name', 'email', 'phone', 'is_active', 'last_login_at', 'created_at', 'client_id')
+            ->select('id', 'name', 'email', 'phone', 'image', 'is_active', 'last_login_at', 'created_at', 'client_id')
             ->paginate(10);
 
         return view('super_admin.assistants.index', compact('assistants'));
@@ -85,5 +85,22 @@ class ClientAssistantManageController extends Controller
         $assistant->delete();
         return redirect()->route('super_admin.client_assistant.manage')
             ->with('success', __('messages.client_assistant.deleted_successfully'));
+    }
+
+    public function deleteMultiple()
+    {
+        $ids = request()->input('ids', []);
+        try {
+            ClientAssistant::destroy($ids);
+            return response()->json([
+                'status' => 'success',
+                'message' => __('mutual.delete_success', ['attribute' => __('mutual.selected_client_assistants')]),
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => __('mutual.delete_failed', ['attribute' => __('mutual.selected_client_assistants')]),
+            ], 500);
+        }
     }
 }

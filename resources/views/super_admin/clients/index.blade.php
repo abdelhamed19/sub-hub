@@ -1,6 +1,6 @@
 <x-super-admin.super-admin-layout-component :title="__('super_admin.clients')">
     <x-super-admin.flash-message-component />
-    <x-table-component :title="__('super_admin.clients')" :createRoute="'super_admin.client.create'">
+    <x-table-component :title="__('super_admin.clients')" :createRoute="'super_admin.client.create'" :deleteMultipleUrl="'super_admin.client.delete_multiple'">
         <table class="table table-bordered">
             <thead>
                 <tr role="row">
@@ -25,8 +25,9 @@
                     <tr>
                         <td>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="{{ $client->id }}">
-                                <label class="custom-control-label" for="{{ $client->id }}"></label>
+                                <input type="checkbox" class="row-checkbox custom-control-input row-checkbox"
+                                id="checkbox-{{ $client->id }}">
+                                <label class="custom-control-label" for="checkbox-{{ $client->id }}"></label>
                             </div>
                         </td>
                         <td>{{ $client->id }}</td>
@@ -42,14 +43,19 @@
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item"
-                                    href="{{ route('super_admin.client.edit', $client->id) }}">{{ __('mutual.edit') }}</a>
+                                    href="{{ route('super_admin.client.edit', $client->id) }}">{{ __('mutual.edit') }}
+                                </a>
+
                                 <a class="dropdown-item text-danger" href="javascript:void(0)"
                                     data-name="{{ $client->name }}"
                                     data-action="super-admin/client/{{ $client->id }}/delete"
                                     onclick="confirmDelete(this)">
                                     {{ __('mutual.delete') }}
-                                    <a class="dropdown-item"
-                                        href="{{ route('super_admin.client.show', $client->id) }}">{{ __('mutual.show') }}</a>
+                                </a>
+
+                                <a class="dropdown-item"
+                                    href="{{ route('super_admin.client.show', $client->id) }}">{{ __('mutual.show') }}
+                                </a>
                             </div>
                         </td>
                     </tr>

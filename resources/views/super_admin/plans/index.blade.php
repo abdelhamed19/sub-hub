@@ -1,6 +1,6 @@
 <x-super-admin.super-admin-layout-component :title="__('super_admin.manage_plans')">
     <x-super-admin.flash-message-component />
-    <x-table-component :title="__('super_admin.plans')" :createRoute="'super_admin.plan.create'">
+    <x-table-component :title="__('super_admin.plans')" :createRoute="'super_admin.plan.create'" :deleteMultipleUrl="'super_admin.plan.delete_multiple'">
 
         <table class="table table-bordered">
             <thead>
@@ -25,8 +25,9 @@
                     <tr>
                         <td>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="{{ $plan->id }}">
-                                <label class="custom-control-label" for="{{ $plan->id }}"></label>
+                                <input type="checkbox" class="row-checkbox custom-control-input row-checkbox"
+                                    id="checkbox-{{ $plan->id }}">
+                                <label class="custom-control-label" for="checkbox-{{ $plan->id }}"></label>
                             </div>
                         </td>
                         <td>{{ $plan->id }}</td>
@@ -41,14 +42,19 @@
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item"
-                                    href="{{ route('super_admin.plan.edit', $plan->id) }}">{{ __('mutual.edit') }}</a>
+                                    href="{{ route('super_admin.plan.edit', $plan->id) }}">{{ __('mutual.edit') }}
+                                </a>
+
                                 <a class="dropdown-item text-danger" href="javascript:void(0)"
                                     data-name="{{ $plan->name }}"
                                     data-action="super-admin/plans/{{ $plan->id }}/delete"
                                     onclick="confirmDelete(this)">
                                     {{ __('mutual.delete') }}
-                                    <a class="dropdown-item"
-                                        href="{{ route('super_admin.plan.show', $plan->id) }}">{{ __('mutual.show') }}</a>
+                                </a>
+
+                                <a class="dropdown-item"
+                                    href="{{ route('super_admin.plan.show', $plan->id) }}">{{ __('mutual.show') }}
+                                </a>
                             </div>
                         </td>
                     </tr>
@@ -60,6 +66,7 @@
 
             </tbody>
         </table>
+        {{ $plans->links() }}
     </x-table-component>
 
 </x-super-admin.super-admin-layout-component>

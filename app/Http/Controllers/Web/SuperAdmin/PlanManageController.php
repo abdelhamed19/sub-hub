@@ -75,4 +75,21 @@ class PlanManageController extends Controller
             return redirect()->back()->with('error', __('mutual.delete_failed', ['attribute' => __('mutual.plan')]));
         }
     }
+
+    public function deleteMultiple()
+    {
+        $ids = request()->input('ids', []);
+        try {
+            Plan::destroy($ids);
+            return response()->json([
+                'status' => 'success',
+                'message' => __('mutual.delete_success', ['attribute' => __('mutual.selected_plans')]),
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => __('mutual.delete_failed', ['attribute' => __('mutual.selected_plans')]),
+            ], 500);
+        }
+    }
 }

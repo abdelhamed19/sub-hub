@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="{{ asset("dashboard/$path/css/quill.snow.css") }}">
     <link rel="stylesheet" href="{{ asset("dashboard/$path/css/simplebar.css") }}">
     <link rel="stylesheet" href="{{ asset("dashboard/$path/css/dataTables.bootstrap4.css") }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <!-- Date Range Picker CSS -->
     <link rel="stylesheet" href="{{ asset("dashboard/$path/css/daterangepicker.css") }}">
     <!-- App CSS -->

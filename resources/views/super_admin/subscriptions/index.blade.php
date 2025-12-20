@@ -1,7 +1,7 @@
 <x-super-admin.super-admin-layout-component :title="__('super_admin.manage_plans')">
     <x-super-admin.flash-message-component />
 
-    <x-table-component :title="__('super_admin.subscriptions')" :createRoute="'super_admin.subscription.create'">
+    <x-table-component :title="__('super_admin.subscriptions')" :createRoute="'super_admin.subscription.create'" :deleteMultipleUrl="'super_admin.subscription.delete_multiple'">
 
         <table class="table table-bordered">
             <thead>
@@ -28,8 +28,9 @@
                     <tr>
                         <td>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="sub_{{ $subscription->id }}">
-                                <label class="custom-control-label" for="sub_{{ $subscription->id }}"></label>
+                                <input type="checkbox" class="row-checkbox custom-control-input row-checkbox"
+                                id="checkbox-{{ $subscription->id }}">
+                                <label class="custom-control-label" for="checkbox-{{ $subscription->id }}"></label>
                             </div>
                         </td>
 
@@ -75,8 +76,8 @@
                                 </a>
 
                                 <a class="dropdown-item text-danger" href="javascript:void(0)"
-                                    data-name="{{ $subscription->client->legal_name }}"
-                                    data-action="super-admin/subscriptions/{{ $subscription->id }}/delete"
+                                    data-name="{{ $subscription->client?->legal_name }}"
+                                    data-action="super-admin/subscription/{{ $subscription->id }}/delete"
                                     onclick="confirmDelete(this)">
                                     {{ __('mutual.delete') }}
                                 </a>
@@ -97,6 +98,6 @@
                 @endforelse
             </tbody>
         </table>
-
+        {{ $subscriptions->links() }}
     </x-table-component>
 </x-super-admin.super-admin-layout-component>

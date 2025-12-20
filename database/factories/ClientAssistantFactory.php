@@ -20,12 +20,12 @@ class ClientAssistantFactory extends Factory
             'client_id' => \App\Models\Client::factory(),
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
-            'password' => 'password', // Will be hashed by the model's mutator
+            'password' => 'password',
             'phone' => $this->faker->phoneNumber(),
             'is_active' => $this->faker->boolean(80),
             'last_login_at' => null,
             'role' => $this->faker->randomElement(['admin', 'support', 'viewer']),
-            'image' => null,
+            'image' => 'https://picsum.photos/seed/' . fake()->unique()->numberBetween(1, 1000) . '/200/200',
         ];
     }
 }

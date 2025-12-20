@@ -16,7 +16,12 @@
                             </button>
                             <div class="dropdown-menu" aria-labelledby="actionMenuButton">
                                 <a class="dropdown-item" href="#">Export</a>
-                                <a class="dropdown-item" href="#">Delete</a>
+
+                                <a class="dropdown-item text-danger delete-multiple-link" href="javascript:void(0)"
+                                    data-action="{{ route($deleteMultipleUrl) }}" onclick="deleteAllSelected()">
+                                    <i class="fe fe-trash-2 mr-2"></i> {{ __('mutual.delete_selected') }}
+                                </a>
+
                                 <a class="dropdown-item" href="#">Something else here</a>
                             </div>
                         </div>

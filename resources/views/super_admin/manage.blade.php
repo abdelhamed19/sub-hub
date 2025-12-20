@@ -1,6 +1,6 @@
 <x-super-admin.super-admin-layout-component :title="__('super_admin.super_admin')">
     <x-super-admin.flash-message-component />
-    <x-table-component :title="__('super_admin.super_admin')" :createRoute="'super_admin.create'">
+    <x-table-component :title="__('super_admin.super_admin')" :createRoute="'super_admin.create'" :deleteMultipleUrl="'super_admin.super_admin.delete_multiple'">
 
         <table class="table table-bordered">
             <thead>
@@ -25,8 +25,9 @@
                     <tr>
                         <td>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="{{ $admin->id }}">
-                                <label class="custom-control-label" for="{{ $admin->id }}"></label>
+                                <input type="checkbox" class="row-checkbox custom-control-input row-checkbox"
+                                id="checkbox-{{ $admin->id }}">
+                                <label class="custom-control-label" for="checkbox-{{ $admin->id }}"></label>
                             </div>
                         </td>
                         <td>{{ $admin->id }}</td>

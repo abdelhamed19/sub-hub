@@ -10,13 +10,15 @@ class TableComponent extends Component
 {
     public $title;
     public $createRoute;
+    public $deleteMultipleUrl;
     /**
      * Create a new component instance.
      */
-    public function __construct($title, $createRoute)
+    public function __construct($title, $createRoute, $deleteMultipleUrl)
     {
         $this->title = $title;
         $this->createRoute = $createRoute;
+        $this->deleteMultipleUrl = $deleteMultipleUrl;
     }
 
     /**
@@ -27,6 +29,7 @@ class TableComponent extends Component
         return view('components.table-component', [
             'title' => $this->title,
             'createRoute' => $this->createRoute,
+            'deleteMultipleUrl' => $this->deleteMultipleUrl,
         ]);
     }
 }

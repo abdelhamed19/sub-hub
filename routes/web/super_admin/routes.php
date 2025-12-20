@@ -33,6 +33,7 @@ Route::middleware(['auth:super_admin'])->prefix('/super-admin')
         Route::post('/{id}/update', [SuperAdminManageController::class, 'update'])->name('super_admin.update')->middleware('check.role:super');
         Route::delete('/{id}/delete', [SuperAdminManageController::class, 'delete'])
             ->name('super_admin.delete')->middleware('check.role:super');
+            Route::delete('/super-admin/delete-multiple', [SuperAdminManageController::class, 'deleteMultiple'])->name('super_admin.super_admin.delete_multiple')->middleware('check.role:super');
 
         Route::get('/client/dashboard', [ClientManageController::class, 'dashboard'])->name('super_admin.client.dashboard');
         Route::get('/client/manage', [ClientManageController::class, 'index'])->name('super_admin.client.manage');
@@ -44,6 +45,7 @@ Route::middleware(['auth:super_admin'])->prefix('/super-admin')
         Route::delete('/client/{client}/delete', [ClientManageController::class, 'delete'])->name('super_admin.client.delete');
         Route::post('/client/{id}/restore', [ClientManageController::class, 'restore'])->name('super_admin.client.restore');
         Route::delete('/client/{id}/force-delete', [ClientManageController::class, 'forceDelete'])->name('super_admin.client.force_delete');
+        Route::delete('/client/delete-multiple', [ClientManageController::class, 'deleteMultiple'])->name('super_admin.client.delete_multiple');
 
         Route::get('/client/client-assistant/manage', [ClientAssistantManageController::class, 'index'])->name('super_admin.client_assistant.manage');
         Route::get('/client/client-assistant/create', [ClientAssistantManageController::class, 'create'])->name('super_admin.client_assistant.create');
@@ -52,6 +54,7 @@ Route::middleware(['auth:super_admin'])->prefix('/super-admin')
         Route::get('/client/client-assistant/{assistant}/edit', [ClientAssistantManageController::class, 'edit'])->name('super_admin.client_assistant.edit');
         Route::put('/client/client-assistant/{assistant}/update', [ClientAssistantManageController::class, 'update'])->name('super_admin.client_assistant.update');
         Route::delete('/client/client-assistant/{assistant}/delete', [ClientAssistantManageController::class, 'delete'])->name('super_admin.client_assistant.delete');
+        Route::delete('/client/client-assistant/delete-multiple', [ClientAssistantManageController::class, 'deleteMultiple'])->name('super_admin.client_assistant.delete_multiple');
 
         Route::get('/plans/manage', [PlanManageController::class, 'index'])->name('super_admin.plan.manage');
         Route::get('/show/plans/{plan}', [PlanManageController::class, 'show'])->name('super_admin.plan.show');
@@ -60,6 +63,7 @@ Route::middleware(['auth:super_admin'])->prefix('/super-admin')
         Route::post('/plans/store', [PlanManageController::class, 'store'])->name('super_admin.plan.store');
         Route::put('/plans/{plan}/update', [PlanManageController::class, 'update'])->name('super_admin.plan.update');
         Route::delete('/plans/{plan}/delete', [PlanManageController::class, 'destroy'])->name('super_admin.plan.delete');
+        Route::delete('/plans/delete-multiple', [PlanManageController::class, 'deleteMultiple'])->name('super_admin.plan.delete_multiple');
 
         Route::get('/subscriptions/manage', [SubscriptionManageController::class, 'index'])->name('super_admin.subscription.manage');
         Route::get('/subscription/{subscription}/show', [SubscriptionManageController::class, 'show'])->name('super_admin.subscription.show');
@@ -68,6 +72,7 @@ Route::middleware(['auth:super_admin'])->prefix('/super-admin')
         Route::post('/subscription/store', [SubscriptionManageController::class, 'store'])->name('super_admin.subscription.store');
         Route::put('/subscription/{subscription}/update', [SubscriptionManageController::class, 'update'])->name('super_admin.subscription.update');
         Route::delete('/subscription/{subscription}/delete', [SubscriptionManageController::class, 'destroy'])->name('super_admin.subscription.delete');
+        Route::delete('/subscription/delete-multiple', [SubscriptionManageController::class, 'deleteMultiple'])->name('super_admin.subscription.delete_multiple');
 
         Route::get('/billings/manage', [BillingManageController::class, 'index'])->name('super_admin.billing.manage');
         Route::get('/billings/{billing}', [BillingManageController::class, 'show'])->name('super_admin.billing.show');
@@ -76,6 +81,7 @@ Route::middleware(['auth:super_admin'])->prefix('/super-admin')
         Route::post('/billings/store', [BillingManageController::class, 'store'])->name('super_admin.billing.store');
         Route::put('/billings/{billing}/update', [BillingManageController::class, 'update'])->name('super_admin.billing.update');
         Route::delete('/billings/{billing}/delete', [BillingManageController::class, 'destroy'])->name('super_admin.billing.delete');
+        Route::delete('/billings/delete-multiple', [BillingManageController::class, 'deleteMultiple'])->name('super_admin.billing.delete_multiple');
     });
 
 // Auth

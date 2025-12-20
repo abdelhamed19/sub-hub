@@ -30,7 +30,7 @@ class Subscription extends BaseModel
         return $query->where(function ($q) use ($term) {
             $q->where('is_active', 'like', $term);
             $q->orWhere('start_date', 'like', $term);
-            $q->orWhere('end_date', 'like', $term); 
+            $q->orWhere('end_date', 'like', $term);
             $q->whereHas('plan', function ($plan) use ($term) {
                 $plan->where('name', 'like', $term);
             })->orWhereHas('client', function ($client) use ($term) {
@@ -57,12 +57,12 @@ class Subscription extends BaseModel
 
     protected static function booted()
     {
-        static::saving(function ($plan) {
-            Cache::tags(['subscriptions', 'clients'])->flush();
+        static::saving(function ($subscription) {
+            Cache::tags($subscription::$cacheTag)->flush();
         });
 
-        static::deleted(function ($plan) {
-            Cache::tags(['subscriptions', 'clients'])->flush();
+        static::deleted(function ($subscription) {
+            Cache::tags([$subscription::$cacheTag])->flush();
         });
     }
 }

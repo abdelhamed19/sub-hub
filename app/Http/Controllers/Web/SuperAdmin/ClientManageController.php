@@ -98,4 +98,21 @@ class ClientManageController extends Controller
         $client->forceDelete();
         return redirect()->route('super_admin.client.force_delete')->with('success', 'Client permanently deleted.');
     }
+
+    public function deleteMultiple()
+    {
+        $ids = request()->input('ids', []);
+        try {
+            Client::destroy($ids);
+            return response()->json([
+                'status' => 'success',
+                'message' => __('mutual.delete_success', ['attribute' => __('mutual.selected_clients')]),
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => __('mutual.delete_failed', ['attribute' => __('mutual.selected_clients')]),
+            ], 500);
+        }
+    }
 }

@@ -1,6 +1,6 @@
 <x-super-admin.super-admin-layout-component :title="__('super_admin.manage_clients_assistants')">
     <x-super-admin.flash-message-component />
-    <x-table-component :title="__('super_admin.clients_assistants')" :createRoute="'super_admin.client_assistant.create'">
+    <x-table-component :title="__('super_admin.clients_assistants')" :createRoute="'super_admin.client_assistant.create'" :deleteMultipleUrl="'super_admin.client_assistant.delete_multiple'">
 
         <table class="table table-bordered">
             <thead>
@@ -25,8 +25,9 @@
                     <tr>
                         <td>
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="{{ $assistant->id }}">
-                                <label class="custom-control-label" for="{{ $assistant->id }}"></label>
+                                <input type="checkbox" class="row-checkbox custom-control-input row-checkbox"
+                                id="checkbox-{{ $assistant->id }}">
+                                <label class="custom-control-label" for="checkbox-{{ $assistant->id }}"></label>
                             </div>
                         </td>
                         <td>{{ $assistant->id }}</td>
@@ -35,20 +36,26 @@
                         <td>{{ $assistant->phone }}</td>
                         <td>{{ $assistant->client->name }} ({{ $assistant->client->legal_name }})</td>
                         <td><x-status-component :isActive="$assistant->is_active" /></td>
+
                         <td><button class="btn btn-sm dropdown-toggle more-horizontal" type="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="text-muted sr-only">Action</span>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
                                 <a class="dropdown-item"
-                                    href="{{ route('super_admin.client_assistant.edit', $assistant->id) }}">{{ __('mutual.edit') }}</a>
+                                    href="{{ route('super_admin.client_assistant.edit', $assistant->id) }}">{{ __('mutual.edit') }}
+                                </a>
+
                                 <a class="dropdown-item text-danger" href="javascript:void(0)"
                                     data-name="{{ $assistant->name }}"
                                     data-action="super-admin/client/client-assistant/{{ $assistant->id }}/delete"
                                     onclick="confirmDelete(this)">
                                     {{ __('mutual.delete') }}
-                                    <a class="dropdown-item"
-                                        href="{{ route('super_admin.client_assistant.show', $assistant->id) }}">{{ __('mutual.show') }}</a>
+                                </a>
+
+                                <a class="dropdown-item"
+                                    href="{{ route('super_admin.client_assistant.show', $assistant->id) }}">{{ __('mutual.show') }}
+                                </a>
                             </div>
                         </td>
                     </tr>

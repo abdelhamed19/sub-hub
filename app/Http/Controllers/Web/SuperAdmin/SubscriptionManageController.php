@@ -78,5 +78,36 @@ class SubscriptionManageController extends Controller
 
     public function update(Subscription $subscription) {}
 
-    public function destroy(Subscription $subscription) {}
+    public function destroy(Subscription $subscription)
+    {
+        try {
+            $subscription->delete();
+            return redirect()->route('super_admin.subscription.manage')->with('success', __('mutual.delete_success', ['attribute' => __('mutual.subscription')]));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', __('mutual.delete_failed', ['attribute' => __('mutual.subscription')]));
+        }
+    }
+
+    public function deleteMultiple()
+    {
+        $ids = request()->input('ids', []);
+
+        try {
+            Subscription::destroy($ids);
+
+            return response()->json([
+                'status' => 'success',
+                'message' => __('mutual.delete_success', [
+                    'attribute' => __('mutual.selected_subscriptions')
+                ]),
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => __('mutual.delete_failed', [
+                    'attribute' => __('mutual.selected_subscriptions')
+                ]),
+            ], 500);
+        }
+    }
 }

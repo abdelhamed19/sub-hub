@@ -90,4 +90,15 @@ return
     'all_assistants' => 'جميع المساعدين',
     'back' => 'عودة',
     'filter' => 'تصفية',
+    'confirm_delete_selected' => 'تأكيد حذف العناصر المحددة',
+    'are_you_sure' => 'هل أنت متأكد؟',
+    'items' => 'عناصر',
+    'oops' => 'عذرًا!',
+    'no_items_selected' => 'لم يتم تحديد أي عناصر للحذف.',
+    'ok' => 'حسنًا',
+    'cancelled' => 'تم الإلغاء',
+    'delete_selected' => 'حذف المحدد',
+    'delete_success_multiple' => 'تم حذف العناصر المحددة بنجاح.',
+    'error_deleting_multiple' => 'حدث خطأ أثناء حذف العناصر المحددة.',
+    'deleted' => 'تم الحذف'
 ];
